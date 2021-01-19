@@ -1,9 +1,11 @@
 //jshint esversion:6
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 const _ = require('lodash');
-require('dotenv').config();
+
+if (process.env.NODE_ENV !== 'production') require('dotenv').config();
+
+const mongoose = require('mongoose');
 
 const app = express();
 
@@ -16,10 +18,8 @@ app.use(
 );
 app.use(express.static('public'));
 
-const mongooseAPIKey = process.env.MONGODB_CONNECTION_STRING;
-
 //mongoose connet string
-mongoose.connect(mongooseAPIKey, {
+mongoose.connect(process.env.MONGODB_CONNECTION_STRING, {
 	useNewUrlParser    : true,
 	useUnifiedTopology : true
 });
