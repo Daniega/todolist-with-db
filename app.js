@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const _ = require('lodash');
+require('dotenv').config();
 
 const app = express();
 
@@ -15,8 +16,10 @@ app.use(
 );
 app.use(express.static('public'));
 
+const mongooseAPIKey = process.env.MONGODB_CONNECTION_STRING;
+
 //mongoose connet string
-mongoose.connect('mongodb+srv://admin-daniel:test123@cluster0.zbskt.mongodb.net/todolistDB', {
+mongoose.connect(mongooseAPIKey, {
 	useNewUrlParser    : true,
 	useUnifiedTopology : true
 });
